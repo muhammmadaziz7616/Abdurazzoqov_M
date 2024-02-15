@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  backend_service:
+    build: .
+
+    env_file: .env
+    restart: always
+    ports:
+      - '8005:8000'
+
+  postgres_service:
+    image: postgres:alpine
+    ports:
+      - '5433:5433'
+    volumes:
+      - pg_data_service:/var/lib/postgresql/data
+    env_file: .env
+
+volumes:
+  pg_data_service:
